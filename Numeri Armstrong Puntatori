@@ -1,0 +1,65 @@
+//Numeri Armstrong utilizzando i puntatori
+#include <stdio.h>
+#include <math.h>
+void scan(int v1[]);
+void scanVect(int v1[], int v2[], int *count_ptr);
+int checkArmstrong(int num);
+void print(int v2[], int *count_ptr);
+#define MAX 15
+
+int main() {
+    int v1[MAX]={0}, v2[MAX]={0}, count=0;
+    int *count_ptr;
+    count_ptr=&count;
+    printf("Algoritmo per calcolare i numeri armstrong fra i numeri inseriti (MAX=15)\n--------------------\nInserire numeri positivi interi: (0 = termina inserimento)\n");
+    scan(v1);
+    scanVect(v1, v2, &count);
+    print(v2, &count);
+    return 0;
+}
+
+void scan(int v1[]) {
+    for(int i=0; i<MAX; i++) {
+        scanf("%d", &v1[i]);
+        if(v1[i]==0)
+        break;
+    }
+}
+
+void scanVect(int v1[], int v2[], int *count_ptr) {
+    for(int i=0; i<MAX; i++) {
+        if(v1[i]!=0) {
+            if(checkArmstrong(v1[i])){
+                v2[*count_ptr]=v1[i];
+                (*count_ptr)++;
+            }
+        }
+    }
+}
+
+int checkArmstrong(int num) {
+    int sum=0, cifre=0, temp1=num, temp2;
+    while(temp1>0){
+        temp1/=10;
+        cifre++;
+    }
+    temp1=num;
+    for(int i=1; i<=cifre; i++) {
+        temp2=temp1%10;
+        sum+=pow(temp2, cifre);
+        temp1/=10;
+    }
+    return sum==num;
+}
+
+void print(int v2[], int *count_ptr) {
+    if(*count_ptr==0) {
+        printf("Non ci sono numeri Armstrong.");
+    }
+    else {
+        printf("Numeri Armstrong:\t");
+        for(int i=0; i<*count_ptr; i++) {
+            printf("%d\t", v2[i]);
+        }
+    }
+}
