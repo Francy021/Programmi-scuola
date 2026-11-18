@@ -1,0 +1,25 @@
+//Inverti stringa
+#include <stdio.h>
+#include <string.h>
+#define MAX 100
+void processaStringa(char *originale, char *invertita);
+
+int main() {
+    char originale[MAX], invertita[MAX];
+    printf("Inserire una stringa (max %d caratteri):\n", MAX);
+    fgets(originale, MAX, stdin);
+    originale[strcspn(originale, "\n")]='\0';
+    processaStringa(originale, invertita);
+    printf("Stringa originale: %s\n", originale);
+    printf("Stringa invertita: %s\n", invertita);
+    return 0;
+}
+
+void processaStringa(char *originale, char *invertita) { 
+    int j=0;
+    for(int i=strlen(originale)-1; i>=0; i--) {
+            *(invertita+j)=*(originale+i);
+            j++;
+        }
+    *(invertita+j)='\0';
+}
