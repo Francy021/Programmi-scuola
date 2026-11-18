@@ -1,0 +1,35 @@
+//Scambio min e max in un'array con aritmetica dei puntatori
+#include <stdio.h>
+void stampa(int *vettore, int count);
+void scambioMinMax(int *vettore, int count);
+#define MAX 10
+
+int main() {
+    int vettore[MAX]={1,5,23,87,35,24,13,98,100,104}, count;
+    count=MAX;
+    stampa(vettore, count);
+    scambioMinMax(vettore, count);
+    stampa(vettore, count);
+    return 0;
+}
+
+void stampa(int *vettore, int count) {
+    int *i;
+    for(i=vettore; i<vettore+count; i++) {
+        printf("%d ", *i);
+    }
+    printf("\n");
+}
+
+void scambioMinMax(int *vettore, int count) {
+    int *min=vettore, *max=vettore, temp, *i;
+    for(i=vettore; i<vettore+count; i++) {
+        if(*i<*min)
+            min=i;
+        if(*i>*max)
+            max=i;
+    }
+    temp=*max;
+    *max=*min;
+    *min=temp;
+}
